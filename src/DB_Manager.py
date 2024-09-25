@@ -8,13 +8,18 @@ class DBManager:
         conn = pyodbc.connect(self.connection_string)
         cursor = conn.cursor()
 
-        for product in produtos:
-            cursor.execute("""
-                INSERT INTO STG.Produtos (Produto, Preco, Loja, NotaAvaliacao, QtdeAvaliacao, Frete, ImagemLink, ProdutoLink)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-            """, product['produto'], product['preco'], product['loja'], product['nota_avaliacao'], 
-            product['qtde_avaliacao'], product['frete'], product['imagem_link'], product['produto_link'])
+        try:
+            for product in produtos:
+                cursor.execute("""
+                    INSERT INTO STG.Produtos (Produto, Preco, Loja, NotaAvaliacao, QtdeAvaliacao, Frete, ImagemLink, ProdutoLink)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """, product['produto'], product['preco'], product['loja'], product['nota_avaliacao'], 
+                product['qtde_avaliacao'], product['frete'], product['imagem_link'], product['produto_link'])
 
-        conn.commit()
-        cursor.close()
-        conn.close()
+            conn.commit()
+            print(f"{len(produtos)} produtos inseridos com sucesso!")
+        except Exception as e:
+            print(f"Erro ao inserir os produtos: {e}")
+        finally:
+            cursor.close()
+            conn.close()

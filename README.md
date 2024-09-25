@@ -51,7 +51,6 @@ Este projeto é um ETL (Extração, Transformação e Carga) para coletar dados 
 
     Para executar o projeto, utilize o seguinte comando:
     
-    ```bash
     poetry run python src/Main.py
 
 ## Estrutura do Projeto
