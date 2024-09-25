@@ -18,7 +18,7 @@ class ProductExtractor:
                 await page.wait_for_selector('.sh-dgr__content')
 
                 products = await page.query_selector_all('.sh-dgr__content')
-                print(f'\nExtraindo dados da página {page_number}...')
+                print(f'Extraindo dados da página {page_number}...')
 
                 for product in products:
                     await self.extract_product_data(product)
